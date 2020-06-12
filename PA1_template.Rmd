@@ -1,12 +1,8 @@
 ---
 title: 'Reproducible Research: Peer Assessment 1'
-  
 output:
-  html_document: 
-  fig_width: 7
-  fig_higth: 6
-  keep_md: yes
-  
+  md_document: default
+  html_document md_document: default
 ---
 ## Introduction
 
