@@ -22,7 +22,7 @@ The dataset is stored in a comma-separated-value (CSV) file and there are a tota
 ## Loading and preprocessing the data
  
  
-```{r chunk1}
+```{r chunk1, echo=TRUE}
 #Reading Data file:
 ProjectData<-read.csv("activity.csv", sep=",", header=TRUE, stringsAsFactors=TRUE)
 summary(ProjectData)
@@ -32,13 +32,13 @@ summary(ProjectData)
 
 ## What is mean total number of steps taken per day?
 
-```{r chunk2}
+```{r chunk2, echo=TRUE}
 DayStepsMean<- aggregate(steps~date,ProjectData, mean, na.rm=TRUE)
 summary(DayStepsMean)
 ```
 Mean total number of steps taken per day (consistent with the summary above):
 
-``` {r chunk3}
+``` {r chunk3, echo=TRUE}
 mean(DayStepsMean$steps)
 ```
 # 37.3826
@@ -47,7 +47,7 @@ mean(DayStepsMean$steps)
  
 
 # Calculating the total number of steps taken per day:
-```{r chunk4}
+```{r chunk4, echo=TRUE}
 ##Steps taking per day:
 DaySteps<- aggregate(steps~date,ProjectData, na.rm=T, sum)
 head(DaySteps,3)
@@ -67,7 +67,7 @@ hist(DaySteps$steps, main = "Steps per day (NA's removed) ", xlab = "Steps per d
 # Calculating and reporting the mean and median of the total number of steps taken per day:
 
 # Mean of the total number of steps taken per day:
-```{r chunk6}
+```{r chunk6, echo=TRUE}
 TotalDayStepsMean<-mean(DaySteps$steps,na.rm=TRUE)
 TotalDayStepsMean
 ```
@@ -76,7 +76,7 @@ TotalDayStepsMean
 
 
 # Median of the total number of steps taken per day:
-```{r chunk7}
+```{r chunk7, echo=TRUE}
 TotalDayStepsMedian<-median(DaySteps$steps)
 TotalDayStepsMedian
 ```
@@ -87,7 +87,7 @@ TotalDayStepsMedian
 
 Make a time series plot (i.e. \color{red}{\verb|type = "l"|}type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)":
 
-```{r chunk8}
+```{r chunk8, echo=TRUE}
 library(ggplot2)
 DaylyActivity<- aggregate(steps~interval , ProjectData, mean)
 
