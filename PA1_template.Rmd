@@ -1,8 +1,12 @@
 ---
 title: 'Reproducible Research: Peer Assessment 1'
+author: "Nicholai M. Khiterer"
+date: "6/12/2020"
 output:
+  html_document: 
+  word_document:
   md_document: default
-  html_document md_document: default
+keep_md: true
 ---
 ## Introduction
 
@@ -30,22 +34,6 @@ summary(ProjectData)
 ```
 
 
-## What is mean total number of steps taken per day?
-
-```{r chunk2, echo=TRUE}
-DayStepsMean<- aggregate(steps~date,ProjectData, mean, na.rm=TRUE)
-summary(DayStepsMean)
-```
-Mean total number of steps taken per day (consistent with the summary above):
-
-``` {r chunk3, echo=TRUE}
-mean(DayStepsMean$steps)
-```
-# 37.3826
- 
-
- 
-
 # Calculating the total number of steps taken per day:
 ```{r chunk4, echo=TRUE}
 ##Steps taking per day:
@@ -58,10 +46,7 @@ summary(DaySteps)
 ```{r chunk5.png, echo=TRUE}
 
 hist(DaySteps$steps, main = "Steps per day (NA's removed) ", xlab = "Steps per day", ylab = "Frequency", ylim=c(0,30), col = "magenta")
-#dev.off()
-#ping("chunk5")
-#hist(DaySteps$steps, main = "Steps per day (NA's removed) ", xlab = "Steps per day", ylab = "Frequency", col = "magenta")
-#dev.off() 
+  
 ```
  
 # Calculating and reporting the mean and median of the total number of steps taken per day:
@@ -91,7 +76,7 @@ Make a time series plot (i.e. \color{red}{\verb|type = "l"|}type = "l") of the 5
 library(ggplot2)
 DaylyActivity<- aggregate(steps~interval , ProjectData, mean)
 
-p<- ggplot(DaylyActivity, aes(interval,steps,color=steps))+ ggtitle("Dayly Activity")
+p<- ggplot(DaylyActivity, aes(interval,steps,color=steps))+ ggtitle("Daily Activity")
 p + geom_line(size=.5)+labs(x = "5-minute interval")+labs(y = "Average number of steps taken in 5-minute intervals" ) +theme(axis.text=element_text(color="black",size=13))+theme(panel.background=element_rect(fill="khaki"))+theme(axis.title.x=element_text(color='blue',vjust=1.5),axis.title.y=element_text(color="blue",vjust=1.5), plot.title=element_text(color="blue",size=15,vjust=1),
 plot.background=element_rect(fill="lightblue")) 
 
@@ -122,8 +107,7 @@ summary(is.na(ProjectData))
 #There are 2304 NA's in step variable, in initial dataset ProjectData, and 0 NAs in date and 0 NA's in interval columns
 
 
-
-# Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated:
+##Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated:
 
 To devise a strategy for filling missing values in the dataset the article "Tutorial on 5 Powerful R Packages used for imputing missing values" was utilized:[https://www.analyticsvidhya.com/blog/2016/03/tutorial-powerful-packages-imputing-missing-values/]
 
@@ -215,8 +199,8 @@ Yes, there is a difference:both, mean and median have decrased after the imputat
 Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis) 
 ```{r chunk21, echo=TRUE}
 library(ggplot2)
-DaylyActivityImputed<- aggregate(steps~interval,ProjectDataImputed, mean)
-p<- ggplot(DaylyActivity, aes(  interval, steps,color=steps))+ ggtitle("Dayly Activity (with steps NA's imputed)")
+DaiylyActivityImputed<- aggregate(steps~interval,ProjectDataImputed, mean)
+p<- ggplot(DaylyActivity, aes(  interval, steps,color=steps))+ ggtitle("Daily Activity (with steps NA's imputed)")
 p + geom_line(size=.5)+labs(x = "5-minute interval")+labs(y = "Average number of steps taken" ) +theme(axis.text=element_text(color="black",size=13))+theme(panel.background=element_rect(fill="khaki"))+theme(axis.title.x=element_text(color='blue',vjust=1.5),axis.title.y=element_text(color="blue",vjust=1.5), plot.title=element_text(color="blue",size=15,vjust=1),
 plot.background=element_rect(fill="lightblue"))
  
@@ -283,8 +267,9 @@ More steps, in general, are observed starting from about 1000s 5 minute interval
 #plot(plotname)
 library(lattice)
 with(DaylyActivityWeekdaysImputedFinal, xyplot(steps ~ interval | weekdays, type="l", xlab = "Time interval", ylab = "Avarage number of steps taken", layout = c(1, 2)))
- 
+#for the next step:
+library(knitr) 
 ```
- 
+
 
  

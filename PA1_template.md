@@ -37,31 +37,6 @@ Loading and preprocessing the data
     ##  Max.   :806.00   2012-10-06:  288   Max.   :2355.0  
     ##  NA's   :2304     (Other)   :15840
 
-What is mean total number of steps taken per day?
--------------------------------------------------
-
-    DayStepsMean<- aggregate(steps~date,ProjectData, mean, na.rm=TRUE)
-    summary(DayStepsMean)
-
-    ##          date        steps        
-    ##  2012-10-02: 1   Min.   : 0.1424  
-    ##  2012-10-03: 1   1st Qu.:30.6979  
-    ##  2012-10-04: 1   Median :37.3785  
-    ##  2012-10-05: 1   Mean   :37.3826  
-    ##  2012-10-06: 1   3rd Qu.:46.1597  
-    ##  2012-10-07: 1   Max.   :73.5903  
-    ##  (Other)   :47
-
-Mean total number of steps taken per day (consistent with the summary
-above):
-
-    mean(DayStepsMean$steps)
-
-    ## [1] 37.3826
-
-37.3826
-=======
-
 Calculating the total number of steps taken per day:
 ====================================================
 
@@ -91,11 +66,6 @@ Making a histogram of the total number of steps taken each day:
     hist(DaySteps$steps, main = "Steps per day (NA's removed) ", xlab = "Steps per day", ylab = "Frequency", ylim=c(0,30), col = "magenta")
 
 ![](PA1_template_files/figure-markdown_strict/chunk5.png-1.png)
-
-    #dev.off()
-    #ping("chunk5")
-    #hist(DaySteps$steps, main = "Steps per day (NA's removed) ", xlab = "Steps per day", ylab = "Frequency", col = "magenta")
-    #dev.off() 
 
 Calculating and reporting the mean and median of the total number of steps taken per day:
 =========================================================================================
@@ -132,7 +102,7 @@ Make a time series plot (i.e. type = “l”) of the 5-minute interval
     library(ggplot2)
     DaylyActivity<- aggregate(steps~interval , ProjectData, mean)
 
-    p<- ggplot(DaylyActivity, aes(interval,steps,color=steps))+ ggtitle("Dayly Activity")
+    p<- ggplot(DaylyActivity, aes(interval,steps,color=steps))+ ggtitle("Daily Activity")
     p + geom_line(size=.5)+labs(x = "5-minute interval")+labs(y = "Average number of steps taken in 5-minute intervals" ) +theme(axis.text=element_text(color="black",size=13))+theme(panel.background=element_rect(fill="khaki"))+theme(axis.title.x=element_text(color='blue',vjust=1.5),axis.title.y=element_text(color="blue",vjust=1.5), plot.title=element_text(color="blue",size=15,vjust=1),
     plot.background=element_rect(fill="lightblue")) 
 
@@ -168,8 +138,8 @@ Calculating and reporting the total number of missing values in the dataset (i.e
 \#There are 2304 NA’s in step variable, in initial dataset ProjectData,
 and 0 NAs in date and 0 NA’s in interval columns
 
-Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated:
-==========================================================================================================================
+\#\#Devise a strategy for filling in all of the missing values in the
+dataset. The strategy does not need to be sophisticated:
 
 To devise a strategy for filling missing values in the dataset the
 article “Tutorial on 5 Powerful R Packages used for imputing missing
@@ -322,8 +292,8 @@ Make a time series plot (i.e. type = “l”) of the 5-minute interval
 (y-axis)
 
     library(ggplot2)
-    DaylyActivityImputed<- aggregate(steps~interval,ProjectDataImputed, mean)
-    p<- ggplot(DaylyActivity, aes(  interval, steps,color=steps))+ ggtitle("Dayly Activity (with steps NA's imputed)")
+    DaiylyActivityImputed<- aggregate(steps~interval,ProjectDataImputed, mean)
+    p<- ggplot(DaylyActivity, aes(  interval, steps,color=steps))+ ggtitle("Daily Activity (with steps NA's imputed)")
     p + geom_line(size=.5)+labs(x = "5-minute interval")+labs(y = "Average number of steps taken" ) +theme(axis.text=element_text(color="black",size=13))+theme(panel.background=element_rect(fill="khaki"))+theme(axis.title.x=element_text(color='blue',vjust=1.5),axis.title.y=element_text(color="blue",vjust=1.5), plot.title=element_text(color="blue",size=15,vjust=1),
     plot.background=element_rect(fill="lightblue"))
 
@@ -446,3 +416,6 @@ Make a panel plot containing a time series plot (i.e. type = “l”) of the 5-
     with(DaylyActivityWeekdaysImputedFinal, xyplot(steps ~ interval | weekdays, type="l", xlab = "Time interval", ylab = "Avarage number of steps taken", layout = c(1, 2)))
 
 ![](PA1_template_files/figure-markdown_strict/chunk26-1.png)
+
+    #for the next step:
+    library(knitr)
